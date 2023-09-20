@@ -14,7 +14,7 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
     implementation(kotlin("script-runtime"))
-    implementation("org.apache.pdfbox:pdfbox:2.0.12")
+    implementation("org.apache.pdfbox:pdfbox:3.0.0")
 }
 
 tasks.test {

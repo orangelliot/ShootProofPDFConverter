@@ -1,17 +1,18 @@
 import org.apache.pdfbox.pdmodel.PDDocument
+import org.apache.pdfbox.Loader
 import org.apache.pdfbox.text.PDFTextStripper
 import java.io.*
 
 fun main(args: Array<String>) {
-    val fis: InputStream = File("C:\\Users\\ellio\\Downloads\\Input.pdf").inputStream()
-    OpenPDF(fis)
+    val pdffile: File = File("C:\\Users\\ellio\\Downloads\\Input.pdf")
+    OpenPDF(pdffile)
 }
 
-fun OpenPDF(fis: InputStream) {
+fun OpenPDF(pdffile: File) {
     try {
 
         // Load the PDF document
-        val document = PDDocument()
+        val document: PDDocument = Loader.loadPDF(pdffile)
 
         // Create a PDFTextStripper object
         val pdfStripper = PDFTextStripper()
