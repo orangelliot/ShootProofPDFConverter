@@ -20,13 +20,11 @@ fun GetPdfText(pdfFile: File): String {
         // Create a PDFTextStripper object
         val pdfStripper = PDFTextStripper()
 
-        //val pdfImages = PDF`
-
         // Extract text from the PDF
         val pdfText: String = pdfStripper.getText(document)
 
         // Print the extracted text
-        println(pdfText)
+        //println(pdfText)
 
         // Close the document
         document.close()
@@ -40,10 +38,23 @@ fun GetPdfText(pdfFile: File): String {
 
 fun ProcessRawText(pdfText: String): List<List<String>>{
     var csvContent = ArrayList<ArrayList<String>>()
-    val pdfList = pdfText.split("\n")
-    var atEnd = false
+    val pdfList = pdfText.split("\n").toMutableList()
+    val headerLine = pdfList[0]
+    var i = 0
+    var end = false
+    while(!end){
+        var line = pdfList[i]
+        if(line == headerLine){
+            pdfList.removeAt(i)
+            pdfList.removeAt(i)
+        }
+        i++
+        if(i == pdfList.size)
+            end = true
+    }
+
     var j = -1
-    for(i in 0..(pdfList.size-1)){
+    for(i in 0 until (pdfList.size)){
         var line = pdfList[i]
         if(line.startsWith("Order #")){
             val orderNum = line.substringAfter("#").replace("\r", "").plus(",")
@@ -57,8 +68,27 @@ fun ProcessRawText(pdfText: String): List<List<String>>{
         }
         if(line.startsWith("Billing Address")){
             val nameBillingAddress = pdfList[i+1].replace("\r", "").plus(",")
+            csvContent[j].add(nameBillingAddress)
         }
-
+        if(line.startsWith("Buyer Shipping Address")){
+            var k = 1
+            var endAddress = false
+            val zipcodeRegex = Regex("[^,]+(,[^,]+)+(,[^,]+)+[\\d\\d\\d\\d\\d]")
+            while(!endAddress){
+                val matchResult = zipcodeRegex.find(pdfList[i+k])
+                if(matchResult != null){
+                    endAddress = true
+                }
+                k++
+            }
+            var firstImage = pdfList[i+k].replace("\r", "")
+            while(!pdfList[i+k].endsWith(".jpg\r")){
+                k+=1
+                firstImage = firstImage.plus(pdfList[i+k].replace("\r", ""))
+            }
+            firstImage = firstImage.plus(",")
+            csvContent[j].add(firstImage)
+        }
     }
     return csvContent
 }
@@ -70,8 +100,8 @@ fun WriteCsv(csvContent: List<List<String>>) {
         val writer = BufferedWriter(fw)
 
         writer.write("Order#,GalleryName,NameBillingAddress,FilesOrdered,SizeOrdered,PackageCode,Quantity,Total Price,Package,\n")
-        for(i in 0..(csvContent.size-1)){
-            for(j in 0..(csvContent[i].size-1)) {
+        for(i in 0 until (csvContent.size)){
+            for(j in 0 until (csvContent[i].size)) {
                 writer.write(csvContent[i][j])
             }
             writer.write("\n")
