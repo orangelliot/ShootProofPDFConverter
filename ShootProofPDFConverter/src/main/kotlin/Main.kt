@@ -2,8 +2,6 @@ import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.Loader
 import org.apache.pdfbox.text.PDFTextStripper
 import java.io.*
-
-val packageCodes = mapOf("2.5 x 3.5 (8 Wallets)" to 'A', "4 X 6" to 'B', "5 X 7" to 'C', "8 X 10" to 'D', "11 X 14" to 'E', "All Photos from this album" to 'F', "Single Photo" to 'G')
 fun main(args: Array<String>) {
     val pdfFile: File = File("C:\\Users\\ellio\\Downloads\\Input.pdf")
     val pdfText = GetPdfText(pdfFile)
@@ -11,7 +9,7 @@ fun main(args: Array<String>) {
     WriteCsv(csvContent)
 }
 
-fun GetPdfText(pdfFile: File): String {
+fun GetPdfText(pdfFile: File): List<String> {
     try {
 
         // Load the PDF document
@@ -29,68 +27,85 @@ fun GetPdfText(pdfFile: File): String {
         // Close the document
         document.close()
 
-        return pdfText
+        val pdfList = pdfText.split("\n").toMutableList()
+        val headerLine = pdfList[0]
+        var i = 0
+        var end = false
+        while(!end){
+            var line = pdfList[i]
+            if(line == headerLine){
+                pdfList.removeAt(i)
+                pdfList.removeAt(i)
+            }
+            i++
+            if(i == pdfList.size)
+                end = true
+        }
+
+        return pdfList
     } catch (e: Exception) {
         e.printStackTrace()
-        return ""
+        return listOf("")
     }
 }
 
-fun ProcessRawText(pdfText: String): List<List<String>>{
-    var csvContent = ArrayList<ArrayList<String>>()
-    val pdfList = pdfText.split("\n").toMutableList()
-    val headerLine = pdfList[0]
+fun ProcessRawText(pdfList: List<String>): List<Order>{
+    val zipcodeRegex = Regex("[^,]+(,[^,]+)+(,[^,]+)+[\\d\\d\\d\\d\\d]")
+    val sizeRegex = Regex("[2.5 x 3.5 (8 Wallets)]|[4 X 6]|[5 X 7]|[8 X 10]|[11 X 14]|[All Photos from this album]|[Single Photo]]")
+    var orders = ArrayList<Order>()
     var i = 0
-    var end = false
-    while(!end){
-        var line = pdfList[i]
-        if(line == headerLine){
-            pdfList.removeAt(i)
-            pdfList.removeAt(i)
+    var currentOrder: Order = Order(-1)
+    while(i < (pdfList.size)){
+        if(pdfList[i].startsWith("Order #")){
+            val orderNum = Integer.valueOf(pdfList[i].substringAfter("#").replace("\r", "").plus(","))
+            currentOrder = Order(orderNum)
+            orders.add(currentOrder)
         }
-        i++
-        if(i == pdfList.size)
-            end = true
-    }
-
-    var j = -1
-    for(i in 0 until (pdfList.size)){
-        var line = pdfList[i]
-        if(line.startsWith("Order #")){
-            val orderNum = line.substringAfter("#").replace("\r", "").plus(",")
-            csvContent.add(ArrayList<String>())
-            j += 1
-            csvContent[j].add(orderNum)
+        if(pdfList[i].startsWith("Gallery Name")){
+            val galleryName = pdfList[i].substringAfter(":").replace("\r", "").plus(",")
+            currentOrder.galleryName = galleryName
         }
-        if(line.startsWith("Gallery Name")){
-            val galleryName = line.substringAfter(":").replace("\r", "").plus(",")
-            csvContent[j].add(galleryName)
-        }
-        if(line.startsWith("Billing Address")){
+        if(pdfList[i].startsWith("Billing Address")){
             val nameBillingAddress = pdfList[i+1].replace("\r", "").plus(",")
-            csvContent[j].add(nameBillingAddress)
+            currentOrder.nameBillingAddress = nameBillingAddress
         }
-        if(line.startsWith("Buyer Shipping Address")){
-            var k = 1
-            var endAddress = false
-            val zipcodeRegex = Regex("[^,]+(,[^,]+)+(,[^,]+)+[\\d\\d\\d\\d\\d]")
-            while(!endAddress){
-                val matchResult = zipcodeRegex.find(pdfList[i+k])
-                if(matchResult != null){
-                    endAddress = true
+        if(zipcodeRegex.find(pdfList[i]) != null){
+            i++
+            var firstImage = pdfList[i].replace("\r", "")
+            while(!pdfList[i].contains(".jpg")) {
+                i++
+                //if image name line does not contain photo type
+                if (pdfList[i].contains(".jpg")) {
+                    firstImage = firstImage.plus(pdfList[i]).substringBefore(".jpg").plus(".jpg,")
+                    currentOrder.fileOrdered = firstImage
                 }
-                k++
             }
-            var firstImage = pdfList[i+k].replace("\r", "")
-            while(!pdfList[i+k].endsWith(".jpg\r")){
-                k+=1
-                firstImage = firstImage.plus(pdfList[i+k].replace("\r", ""))
+            //find size ordered
+            var matchResult: MatchResult?
+            do {
+                i++
+                matchResult = sizeRegex.find(pdfList[i])
+            } while(matchResult == null)
+            val matchedText = matchResult.value
+            currentOrder.sizeOrdered = matchedText
+            //find quantity and total price
+
+            //get subsequent images
+            var noMoreImages = false
+            while(!noMoreImages){
+                i+=6
+                var subImage = pdfList[i].replace("\r", "")
+                while(!pdfList[i].contains(".jpg")) {
+                    i++
+                    if(pdfList[i].endsWith(".jpg\r")){
+                        subImage = subImage.plus(pdfList[i].replace("\r", ""))
+                    }
+                }
+
             }
-            firstImage = firstImage.plus(",")
-            csvContent[j].add(firstImage)
         }
     }
-    return csvContent
+    return orders
 }
 
 fun WriteCsv(csvContent: List<List<String>>) {
