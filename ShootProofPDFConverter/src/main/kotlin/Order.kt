@@ -17,11 +17,10 @@ class Order(orderNumber: Int){
         return "$orderNumber,$galleryName,$nameBillingAddress,$fileOrdered,$sizeOrdered,$packageCode,$quantity,$totalPrice,$aPackage\n"
     }
 
-    fun cloneForFile(newFileOrdered: String): Order{
+    fun incrementOrder(): Order{
         var newOrder: Order = Order(this.orderNumber+1)
         newOrder.galleryName = this.galleryName
         newOrder.nameBillingAddress = this.nameBillingAddress
-        newOrder.fileOrdered = newFileOrdered
         return newOrder
     }
 }

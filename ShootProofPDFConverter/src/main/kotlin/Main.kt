@@ -35,15 +35,28 @@ fun GetPdfText(pdfFile: File): List<String> {
         var end = false
         while(!end){
             var line = pdfList[i]
+            if(line == " \r"){
+                if(pdfList[i+1] == headerLine){
+                    pdfList.removeAt(i)
+                    pdfList.removeAt(i)
+                }
+                pdfList.removeAt(i)
+            }
             if(line == headerLine){
                 pdfList.removeAt(i)
                 pdfList.removeAt(i)
             }
             i++
-            if(i == pdfList.size)
+            if(i >= pdfList.size)
                 end = true
         }
 
+        /*for(line in pdfList){
+            println(line)
+        }
+
+        exitProcess(0)
+*/
         return pdfList
     } catch (e: Exception) {
         e.printStackTrace()
@@ -61,7 +74,6 @@ fun ProcessRawText(pdfList: List<String>): List<Order>{
         if(pdfList[i].startsWith("Order #")){
             val orderNum = Integer.valueOf(pdfList[i].substringAfter("#").replace("\r", ""))
             currentOrder = Order(orderNum)
-            orders.add(currentOrder)
         }
         if(pdfList[i].startsWith("Gallery Name")){
             val galleryName = pdfList[i].substringAfter(":").replace("\r", "")
@@ -76,28 +88,35 @@ fun ProcessRawText(pdfList: List<String>): List<Order>{
                 i++
             }
             i++
-            var firstImage = pdfList[i].substringBefore(".jpg").replace("\r", "")
-            if(!pdfList[i].contains(".jpg")) {
+            while(!pdfList[i].startsWith("Subtotal")){
+                var curImage = pdfList[i].substringBefore(".jpg").replace("\r", "")
+                if(!pdfList[i].contains(".jpg")) {
+                    i++
+                    curImage = curImage.plus(pdfList[i].substringBefore(".jpg").replace("\r", ""))
+                }
+                curImage = curImage.plus(".jpg")
+                currentOrder.fileOrdered = curImage
+                //find size ordered
+                var matchResult: MatchResult? = sizeRegex.find(pdfList[i])
+                while(matchResult == null) {
+                    i++
+                    matchResult = sizeRegex.find(pdfList[i])
+                }
+                val matchedText = matchResult.value
+                currentOrder.sizeOrdered = matchedText
+                //find quantity and total price
+                while(!pdfList[i].contains("Qty Item Price Total Price")){
+                    i++
+                }
                 i++
-                firstImage = firstImage.plus(pdfList[i].substringBefore(".jpg").replace("\r", ""))
-            }
-            firstImage = firstImage.plus(".jpg")
-            currentOrder.fileOrdered = firstImage
-            //find size ordered
-            var matchResult: MatchResult? = sizeRegex.find(pdfList[i])
-            while(matchResult == null) {
+                currentOrder.quantity = Integer.valueOf(pdfList[i].substringBefore(" "))
+                currentOrder.totalPrice = pdfList[i].substringAfterLast(" ").replace("\r", "")
+
+                //add subsequent images
                 i++
-                matchResult = sizeRegex.find(pdfList[i])
+                orders.add(currentOrder)
+                currentOrder = currentOrder.incrementOrder()
             }
-            val matchedText = matchResult.value
-            currentOrder.sizeOrdered = matchedText
-            //find quantity and total price
-            while(!pdfList[i].contains("Qty Item Price Total Price")){
-                i++
-            }
-            i++
-            currentOrder.quantity = Integer.valueOf(pdfList[i].substringBefore(" "))
-            currentOrder.totalPrice = pdfList[i].substringAfterLast(" ").replace("\r", "")
         }
         i++
     }
