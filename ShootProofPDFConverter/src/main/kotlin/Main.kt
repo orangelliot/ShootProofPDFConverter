@@ -168,6 +168,7 @@ fun WriteCsv(orders: List<Order>, inputFileName: String) {
             writer.write(orders[i].convertToCSV())
         }
         writer.close()
+        println("pdf converted!")
     }
     catch(ioe: IOException){
         ioe.printStackTrace()
