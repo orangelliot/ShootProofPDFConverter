@@ -2,13 +2,46 @@ import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.Loader
 import org.apache.pdfbox.text.PDFTextStripper
 import java.io.*
+import java.nio.file.Paths
 import kotlin.system.exitProcess
 
 fun main(args: Array<String>) {
-    val pdfFile: File = File("C:\\Users\\ellio\\Downloads\\Input.pdf")
-    val pdfText = GetPdfText(pdfFile)
-    val orders = ProcessRawText(pdfText)
-    WriteCsv(orders)
+    var validInput = false
+    var pdfText: List<String> = emptyList()
+    var fileInput: String = ""
+    println("Provide target file path (this can be done by right clicking the file you want to convert and then clicking 'copy as path') or type exit to close the program")
+    while(!validInput){
+        fileInput = readLine()!!.replace("\"", "")
+        if(fileInput.lowercase() == "exit")
+            exitProcess(1)
+        var pdfFile: File
+        try{
+            pdfFile = File(fileInput)
+            if(!fileInput.endsWith(".pdf")){
+                println("File must be a pdf, please check your input and then try again")
+                continue
+            }
+        }
+        catch (e: Exception){
+            println("Invalid file, please check your input and then try again")
+            continue
+        }
+        pdfText = GetPdfText(pdfFile)
+        var isOrderForm = false
+        for(line in pdfText){
+            if(line.startsWith("Order #"))
+                isOrderForm = true
+        }
+        if(!isOrderForm){
+            println("File provided does not appear to be an order form, please check your input and then try again")
+            continue
+        }
+        validInput = true
+    }
+    if(pdfText.isNotEmpty()){
+        val orders = ProcessRawText(pdfText)
+        WriteCsv(orders, fileInput)
+    }
 }
 
 fun GetPdfText(pdfFile: File): List<String> {
@@ -123,9 +156,10 @@ fun ProcessRawText(pdfList: List<String>): List<Order>{
     return orders
 }
 
-fun WriteCsv(orders: List<Order>) {
+fun WriteCsv(orders: List<Order>, inputFileName: String) {
     try{
-        val newCsv = File("C:\\Users\\ellio\\OneDrive\\Documents\\Output.csv")
+        val cwd = Paths.get("").toAbsolutePath().toString()
+        val newCsv = File(cwd + "\\" + inputFileName.substringAfterLast("\\").replace(".pdf", "_") + "output.csv")
         val fw = FileWriter(newCsv)
         val writer = BufferedWriter(fw)
 
