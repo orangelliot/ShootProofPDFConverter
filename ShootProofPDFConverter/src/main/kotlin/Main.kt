@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
     var validInput = false
     var pdfText: List<String> = emptyList()
     var fileInput: String = ""
-    println("Provide target file path (this can be done by right clicking the file you want to convert and then clicking 'copy as path') or type exit to close the program")
+    println("Provide target file path or type exit to close the program")
     while(!validInput){
         fileInput = readLine()!!.replace("\"", "")
         if(fileInput.lowercase() == "exit")
@@ -18,12 +18,12 @@ fun main(args: Array<String>) {
         try{
             pdfFile = File(fileInput)
             if(!fileInput.endsWith(".pdf")){
-                println("File must be a pdf, please check your input and then try again")
+                println("File must be a pdf, please check your input and then try again or type exit to close the program")
                 continue
             }
         }
         catch (e: Exception){
-            println("Invalid file, please check your input and then try again")
+            println("Invalid file, please check your input and then try again or type exit to close the program")
             continue
         }
         pdfText = GetPdfText(pdfFile)
@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
                 isOrderForm = true
         }
         if(!isOrderForm){
-            println("File provided does not appear to be an order form, please check your input and then try again")
+            println("File provided does not appear to be an order form, please check your input and then try again or type exit to close the program")
             continue
         }
         validInput = true
