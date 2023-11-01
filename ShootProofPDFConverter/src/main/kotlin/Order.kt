@@ -1,4 +1,4 @@
-class Order(orderNumber: Int){
+class Order(orderNumber: Int, packageCodes: MutableMap<String, String>){
 
     val orderNumber: Int = orderNumber
     var galleryName: String  = ""
@@ -8,17 +8,17 @@ class Order(orderNumber: Int){
     private var packageCode: String? = ""
     var quantity: Int = 0
     var totalPrice: String = ""
-    var aPackage: String  = ""
+    private var aPackage: String  = ""
 
-    val packageCodes = mapOf("2.5 x 3.5 (8 Wallets)" to "A", "4 x 6" to "B", "5 x 7" to "C", "8 x 10" to "D", "11 x 14" to "E", "All Photos from this album" to "F", "Single Photo" to "G")
-
+    val packageCodes: MutableMap<String, String> = packageCodes
     fun convertToCSV(): String{
-        packageCode = packageCodes[sizeOrdered]
+        packageCode = packageCodes[sizeOrdered.lowercase()]
+        aPackage = packageCode.plus("-$quantity")
         return "$orderNumber,$galleryName,$nameBillingAddress,$fileOrdered,$sizeOrdered,$packageCode,$quantity,$totalPrice,$aPackage\n"
     }
 
-    fun incrementOrder(): Order{
-        var newOrder: Order = Order(this.orderNumber+1)
+    fun copyOrder(): Order{
+        var newOrder: Order = Order(this.orderNumber, packageCodes)
         newOrder.galleryName = this.galleryName
         newOrder.nameBillingAddress = this.nameBillingAddress
         return newOrder

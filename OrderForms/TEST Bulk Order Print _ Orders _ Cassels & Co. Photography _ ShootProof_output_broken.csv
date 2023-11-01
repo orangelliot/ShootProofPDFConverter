@@ -1,0 +1,61 @@
+Order#,GalleryName,NameBillingAddress,FilesOrdered,SizeOrdered,PackageCode,Quantity,Total Price,Package,Correct,Error
+7910907, Seattle Waldorf School 2023,Sylvie Lietart,SWS23_09-10_CLASS-FINAL.jpg,All Album Photos,F,1,$90.00 ,F-1,correct,
+7911304, Seattle Waldorf School 2023,Jessica Haselby,FINAL.jpg,5 x 7,C,1,$15.00 ,C-1,,name of file is SWS23_07_CLASS-FINAL.jpg:
+7911305, Seattle Waldorf School 2023,Jessica Haselby,FINAL.jpg,4 x 6,B,2,$30.00 ,B-2,,name of file is SWS23_07_CLASS-FINAL.jpg:
+,,,,,,,,,,MISSING WALLET ORDER of SWS23_WILTON_QUENBY-07
+7911306, Seattle Waldorf School 2023,Jessica Haselby,SWS23_07_WILTON_QUENBY-07_color.jpg,4 x 6,B,4,$60.00 ,B-4,correct,
+7911621, Seattle Waldorf School 2023,Kenneth Hammer,10_CLASS-FINAL.jpg,8 x 10,D,1,$20.00 ,D-1,,"missing part of file name should be ""SWS23_09-10_CLASS-FINAL"
+7911622, Seattle Waldorf School 2023,Kenneth Hammer,SWS23_10_HAMMER_BRIAN-06_color.jpg,8 x 10,D,1,$20.00 ,D-1,correct,
+7911623, Seattle Waldorf School 2023,Kenneth Hammer,SWS23_10_HAMMER_BRIAN-06_color.jpg,5 x 7,C,2,$30.00 ,C-2,correct,
+,,,,,,,,,,MISSING WALLET ORDER  
+7911624, Seattle Waldorf School 2023,Kenneth Hammer,SWS23_10_HAMMER_BRIAN-06_color.jpg,5 x 7,C,1,$15.00 ,C-1,correct,
+7911856, Seattle Waldorf School 2023,Christina Kubik,SWS23_EC_BR-FINAL.jpg,5 x 7,C,1,$15.00 ,C-1,correct,
+7911857, Seattle Waldorf School 2023,Christina Kubik,05_CLASS-FINAL.jpg,5 x 7,C,1,$15.00 ,C-1,,"missing part of file name should be ""SWS23_04-05_Class-FINAL.jpg"""
+7912018, Seattle Waldorf School 2023,Chad & Stephanie Bartlett,SWS23_02_BARTLETT_WINTER-01_color.jpg,All Album Photos,F,1,$90.00 ,F-1,correct,
+7914136, Seattle Waldorf School 2023,Aaa,SWS23_EC_MYR-FINAL.jpg,Single Photo,G,1,$40.00 ,G-1,Correct,
+7915352, Seattle Waldorf School 2023,Mary DeJong,SWS23_12_DEJONG_ORION-06_color.jpg,8 x 10,D,1,$20.00 ,D-1,correct,
+7915353, Seattle Waldorf School 2023,Mary DeJong,SWS23_12_DEJONG_ORION-06_color.jpg,5 x 7,C,2,$30.00 ,C-2,correct,
+,,,,,,,,,,MISSING WALLET ORDER SWS23_12_DEJONG_ORION-06_color.jpg
+7915354, Seattle Waldorf School 2023,Mary DeJong,SWS23_12_DEJONG_ORION-06_color.jpg,8 x 10,D,3,$45.00 ,D-3,,I don’t see an order for 3 8X10's for this photo - not sure where this one came from
+,,,,,,,,,,There are missing files from this order - and all of the files ordered by Michael Manwaring are showing up under Mary DeJong's items.
+7915355, Seattle Waldorf School 2023,Mary DeJong,SWS23_03_MANWARING_CLAIRE-08_color.jpg,4 x 6,B,2,$30.00 ,B-2,,this is not ordered by Mary DeJong but by Michael Manwaring
+7915356, Seattle Waldorf School 2023,Mary DeJong,FINAL.jpg,5 x 7,C,1,$15.00 ,C-1,,this is not ordered by Mary DeJong but by Michael Manwaring
+7916352, Seattle Waldorf School 2023,Bree Overly,SWS23_08_OVERLY_CHARLOTTE-03_color.jpg,All Album Photos,F,1,$90.00 ,F-1,correct,
+7918011, Seattle Waldorf School 2023,DAVID LUCAS,FINAL.jpg,5 x 7,C,1,$15.00 ,C-1,,SWS23_ 02_CLASS-FINAL.jpg is correct file name
+7918012, Seattle Waldorf School 2023,DAVID LUCAS,SWS23_02_LUCAS_MALAKAI-05_color.jpg,4 x 6,B,2,$30.00 ,B-2,correct,
+7918013, Seattle Waldorf School 2023,DAVID LUCAS,SWS23_02_LUCAS_MALAKAI-03_color.jpg,4 x 6,B,3,$45.00 ,B-3,correct,
+7919556, Seattle Waldorf School 2023,Sean Neil,SWS23_10_NEIL_CANNON-04_BW.jpg,All Album Photos,F,1,$90.00 ,F-1,Correct,
+7919665, Seattle Waldorf School 2023,Huei Ling Shiang,07_color.jpg,5 x 7,C,1,$15.00 ,C-1,,SWS23_ 12_CLASS-07_color.jpg is the correct file name
+7919666, Seattle Waldorf School 2023,Huei Ling Shiang,13_color.jpg,5 x 7,C,1,$15.00 ,C-1,,SWS23_ 12_CLASS-13_color.jpg is the correct file name
+7919667, Seattle Waldorf School 2023,Huei Ling Shiang,25_color.jpg,5 x 7,C,1,$15.00 ,C-1,,SWS23_ 12_CLASS-25_color.jpg
+7919668, Seattle Waldorf School 2023,Huei Ling Shiang,11_color.jpg,5 x 7,C,1,$15.00 ,C-1,,SWS23_ 12_CLASS-11_color.jpg
+7919669, Seattle Waldorf School 2023,Huei Ling Shiang,SWS23_12_ALTSCHULER_JYOTI-05_color.jpg,5 x 7,C,1,$15.00 ,C-1,correct,
+7919712, Seattle Waldorf School 2023,Mona Anastas,COLBURN_ALASTAIR-01_color.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7919713, Seattle Waldorf School 2023,Mona Anastas,COLBURN_ALASTAIR-07_BW.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7919714, Seattle Waldorf School 2023,Mona Anastas,COLBURN_ALASTAIR-02_color.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7919715, Seattle Waldorf School 2023,Mona Anastas,05_CLASS-FINAL.jpg,8 x 10,D,1,$20.00 ,D-1,,
+7921178, Seattle Waldorf School 2023,Rachel Sumpter,SWS23_07_MICKELSON_CALDER-01_color.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7921179, Seattle Waldorf School 2023,Rachel Sumpter,SWS23_10_MICKELSON_MICA-03_color.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7921323, Seattle Waldorf School 2023,JanaMarie Peyton,SWS23_10_PEYTON_IAN-03_BW.jpg,8 x 10,D,1,$20.00 ,D-1,,
+7921324, Seattle Waldorf School 2023,JanaMarie Peyton,SWS23_10_PEYTON_IAN-02_color.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7921574, Seattle Waldorf School 2023,Selena Koopmans,SWS23_EC_DAFFODIL-FINAL.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7921587, Seattle Waldorf School 2023,Sherill Ren,SWS23_EC_MYR-FINAL.jpg,8 x 10,D,1,$20.00 ,D-1,,
+7921593, Seattle Waldorf School 2023,Stephanie Walter,SWS23_06_WALTER_RILEY-03_color.jpg,8 x 10,D,1,$20.00 ,D-1,,
+7921594, Seattle Waldorf School 2023,Stephanie Walter,FINALV2.jpg,All Album Photos,F,1,$90.00 ,F-1,,
+7921595, Seattle Waldorf School 2023,Stephanie Walter,12_CLASS-FINAL.jpg,All Album Photos,F,1,$90.00 ,F-1,,
+7921596, Seattle Waldorf School 2023,Stephanie Walter,SWS23_12_WALTER_JAYDEN-01_color.jpg,8 x 10,D,1,$20.00 ,D-1,,
+7921655, Seattle Waldorf School 2023,William Hines,SWS23_12_HINES_CEDAR-01_color.jpg,All Album Photos,F,1,$90.00 ,F-1,,
+7921663, Seattle Waldorf School 2023,Jessica Chisum Reese,SWS23_EC_BR-FINAL.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7921664, Seattle Waldorf School 2023,Jessica Chisum Reese,SWS23_03_CHISUMREESE_IMOGEN-06_color.jpg,4 x 6,B,1,$15.00 ,B-1,,
+7921665, Seattle Waldorf School 2023,Jessica Chisum Reese,SWS23_03_CLASS-FINAL.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7921677, Seattle Waldorf School 2023,Zoe Sonoda,32_color.jpg,8 x 10,D,1,$20.00 ,D-1,,
+7921678, Seattle Waldorf School 2023,Zoe Sonoda,SWS23_11_FONDREN_KAHEALANI-02_color.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7922138, Seattle Waldorf School 2023,Jessica WARREN,05_CLASS-FINAL.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7922139, Seattle Waldorf School 2023,Jessica WARREN,SWS23_04_WARREN_JESSICA-07_color.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7922301, Seattle Waldorf School 2023,Cynthia Abbott,SWS23_03_ABBOTT_ELOISE-03_color.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7922302, Seattle Waldorf School 2023,Cynthia Abbott,FINALV2.jpg,5 x 7,C,1,$15.00 ,C-1,,
+7922303, Seattle Waldorf School 2023,Cynthia Abbott,SWS23_06_ABBOTT_CLIVE-07_color.jpg,5 x 7,C,1,$20.00 ,C-1,,
+7922304, Seattle Waldorf School 2023,Cynthia Abbott,SWS23_07_HORSMAN_MELINA-08_color.jpg,5 x 7,C,2,$30.00 ,C-2,,
+7922305, Seattle Waldorf School 2023,Cynthia Abbott,SWS23_07_HORSMAN_MELINA-03_color.jpg,All Album Photos,F,1,$90.00 ,F-1,,
+7922306, Seattle Waldorf School 2023,Cynthia Abbott,SWS23_07_HORSMAN_MELINA-03_color.jpg,4 x 6,B,2,$30.00 ,B-2,,
+7922419, Seattle Waldorf School 2023,Alex Mertens,SWS23_EC_CHICKADEE-FINAL.jpg,5 x 7,C,5,$75.00 ,C-5,,
